@@ -12,8 +12,12 @@ from appium.webdriver.common.touch_action import TouchAction
 
 capabilities={
   "platformName": "Android",
-  "deviceName": "127.0.0.1:62001",
-  # "app": "D:\\python_code\Appium_Learn\\testing_software\\wangjiao.apk",
+  #多次尝试，时间模拟并不会按照填写的devicesName运行
+  # "deviceName": "127.0.0.1:62001",#夜神
+  # "deviceName": "af0814d",#我的爪机
+  "deviceName": "192.168.75.103:5555",#Genymotion
+
+  "app": "D:\\python_code\Appium_Learn\\testing_software\\wangjiao.apk",
   # # appPackage、appActivity,写了电脑上的绝对路径，这俩就不需要配置
   # # 特点：1.这里不支持相对路径 2.每一次都重新安装
 
