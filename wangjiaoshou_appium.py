@@ -1,7 +1,7 @@
 import time
 from appium import webdriver
 from forSwipe import ForSwipe
-
+from selenium.webdriver.remote.switch_to import SwitchTo
 
 def get_driver():
     capabilities = {
@@ -93,20 +93,65 @@ def to_log_out():
     driver.find_element_by_xpath(
         '//android.widget.TextView[@text="取消"]/../androidx.recyclerview.widget.RecyclerView').click()
 
-def zhiku():
-  #webview
-  #智库-列表-点击查看
 
-  time.sleep(1)
-  #切换至智库
-  driver.find_element_by_xpath('//android.widget.TextView[@resource-id="com.wangjiao.prof.wang:id/pw_main_tab_item_view_title_icon"and@text="智库"]').click()
-  # print('r--',r)
-  time.sleep(1)
-  #点击打开书册《数据库》
-  driver.find_element_by_id('com.wangjiao.prof.wang:id/pw_draggable_library_image_iv').click()
-  #打开文章Cygwin
-  driver.find_element_by_xpath('//*[contains(@text,"Cygwin")]').click()
-  
+def zhiku():
+    # webview
+    # 智库-列表-点击查看
+
+    time.sleep(1)
+    # 切换至智库
+    driver.find_element_by_xpath(
+        '//android.widget.TextView[@resource-id="com.wangjiao.prof.wang:id/pw_main_tab_item_view_title_icon"and@text="智库"]').click()
+    # print('r--',r)
+    time.sleep(1)
+    # 点击打开书册《windows软件安装配置》
+    driver.find_element_by_id(
+        'com.wangjiao.prof.wang:id/pw_draggable_library_image_iv').click()
+    time.sleep(1)
+    # 打开文章Cygwin
+    driver.find_element_by_xpath('//*[contains(@text,"Cygwin")]').click()
+    time.sleep(3)
+    #滚到有下载链接的地方
+    sw = ForSwipe(driver)
+    sw.swipe_on('up')
+    time.sleep(1)
+
+    # # webview
+    # # driver.findElementByAccessibilityId("content-desc的值");
+    # testEle=driver.find_element_by_accessibility_id("王教授-Cygwin").tag_name
+    # print(testEle)# android.webkit.WebView
+    # temp_view=driver.find_element_by_accessibility_id("王教授-Cygwin")
+    # driver.switch_to.context(temp_view)
+    # # content-desc为空，获取的是text
+    # t3 = temp_view.get_attribute("contentDescription")
+    # print('是不是：王教授-Cygwin-',t3)
+
+    # #获取当前所处的环境窗口
+    # New_View = driver.current_context
+    # print('New_View is :',New_View)
+
+    # driver.find_element_by_link_text('http://wwww.cygwin.com/').click()
+
+    webview = driver.contexts
+    print('-1-webview--', webview)#-1-webview-- ['NATIVE_APP', 'WEBVIEW_com.wangjiao.prof.wang']
+    
+    # # 随然只有1个view，也要写if切换，要符合高级元素的身份
+    # for viw in webview:
+    #     if 'WEBVIEW_com.wangjiao.prof.wang' in viw:
+           
+    #         driver.switch_to.context(viw)
+    #         break
+
+    # driver.switch_to.context(WebView[0])#切换回原生部分
+    driver.switch_to.context(webview[1])#切换到webview部分
+    #获取当前所处的环境窗口
+    New_View = driver.current_context
+    print('New_View is :',New_View)#New_View is : WEBVIEW_com.wangjiao.prof.wang
+
+    driver.find_element_by_link_text('http://wwww.cygwin.com/').click()
+    
+    # https://www.cnblogs.com/yoyoketang/p/7217818.html
+
 
 # sw = ForSwipe(driver)
 # time.sleep(5)
@@ -114,9 +159,25 @@ def zhiku():
 # time.sleep(1)
 # sw.swipe_on('left')
 # time.sleep(1)
-# go_login()
-# password_login()
+go_login()
+password_login()
 # change_tab()
 # search_data()
-# to_log_out()
-zhiku()
+to_log_out()
+# zhiku()
+
+
+
+
+
+# webview页面无法截图，需切回NATIVE_APP才能使用截图方法；
+
+# driver.switch_to.context('NATIVE_APP')
+
+# driver.save_screenshot('shot.png')
+
+
+
+
+
+
