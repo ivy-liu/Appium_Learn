@@ -7,7 +7,7 @@ def get_driver():
     capabilities = {
         "platformName": "Android",
         "deviceName": "192.168.75.103:5555",
-        "app": "D:\\python_code\\Appium_Learn\\testing_software\\wangjiao.apk",
+        "app": "D:\\python_code\\Appium_Learn\\testing_software\\wangjiaoshou0914.apk",
         # appPackage、appActivity,新版本不需要写，如果appium报错出现activity期待与实际不符，
         # 尝试appWaitActivity,配置appium报错中Found package中的activity
 
@@ -98,7 +98,7 @@ def zhiku():
     # webview
     # 智库-列表-点击查看
 
-    time.sleep(1)
+    time.sleep(10)
     # 切换至智库
     driver.find_element_by_xpath(
         '//android.widget.TextView[@resource-id="com.wangjiao.prof.wang:id/pw_main_tab_item_view_title_icon"and@text="智库"]').click()
@@ -132,18 +132,18 @@ def zhiku():
 
     # driver.find_element_by_link_text('http://wwww.cygwin.com/').click()
 
-    webview = driver.contexts
-    print('-1-webview--', webview)#-1-webview-- ['NATIVE_APP', 'WEBVIEW_com.wangjiao.prof.wang']
+    webviews = driver.contexts
+    print('-1-webview--', webviews)#-1-webview-- ['NATIVE_APP', 'WEBVIEW_com.wangjiao.prof.wang']
     
     # # 随然只有1个view，也要写if切换，要符合高级元素的身份
-    # for viw in webview:
+    # for viw in webviews:
     #     if 'WEBVIEW_com.wangjiao.prof.wang' in viw:
            
     #         driver.switch_to.context(viw)
     #         break
 
     # driver.switch_to.context(WebView[0])#切换回原生部分
-    driver.switch_to.context(webview[1])#切换到webview部分
+    driver.switch_to.context(webviews[1])#切换到webview部分
     #获取当前所处的环境窗口
     New_View = driver.current_context
     print('New_View is :',New_View)#New_View is : WEBVIEW_com.wangjiao.prof.wang
@@ -159,12 +159,12 @@ def zhiku():
 # time.sleep(1)
 # sw.swipe_on('left')
 # time.sleep(1)
-go_login()
-password_login()
+# go_login()
+# password_login()
 # change_tab()
 # search_data()
-to_log_out()
-# zhiku()
+# to_log_out()
+zhiku()
 
 
 
